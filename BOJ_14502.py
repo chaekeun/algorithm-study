@@ -31,6 +31,7 @@ def dfs(x, y):
 
     for dx, dy in (-1,0), (1,0), (0,-1), (0,1): #좌우하상(?)이동을 위한 반복문
         nx, ny = x+dx, y+dy 
+        #nx >= = 포함시켜야함
         if nx<0 or nx>=n or ny<0 or ny>=m:
             continue #범위를 벗어나면 다음 반복으로 넘어간다
         if not(visited[nx][ny] or a[nx][ny]): #인접노드가 방문한적 없거나 입력받은 연구소 지도 좌표가 빈공간 (= 0 = False) 일 경우 if문 실행
@@ -58,7 +59,9 @@ def solve(wall, x, y):
             if a[i][j] == 0: #빈공간이면
                 a[i][j] = 1 #일단 벽을 세워보고
                 solve(wall+1, i, j+1) #wall+1값해주고 다음 열로 넘어가서 재귀 (wall == 3일때까지)
-                a[i][j] = 0 #재귀 호출 끝나면(backtracking) 벽을 다시 제거하여 이전 상태로 돌아간다.
+                a[i][j] = 0 #재귀 호출 끝나면(backtracking) 벽을 다시 제거하여 이전 상태로 돌아간다. 
+                #다시 열 순회하면서 벽 세워본다. -> 재귀함수의 방향을 따져보기
+                #그 원리를 같이 외우기
 
 #연구소의 initial 상태 저장
 for i in range(n):
