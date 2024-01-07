@@ -3,6 +3,8 @@
 #if (countWall = 3) then DFS(if(0) then (2) and countVirus++)
 #answer = max(N*M-countVirus)
 
+#필요한것 : 연구실지도크기, 입력값, dfs를 위한 visited, virus위치들, 안전한 영역의 수, 감염된 영역의 수
+
 #연구실 지도 크기
 n, m = map(int, input().split())
 #연구실 지도 모양 저장
@@ -36,7 +38,7 @@ def dfs(x, y):
     return countVirus
 
 def solve(wall, x, y):
-    global virus, c
+    global virus, cnt
     if wall == 3:
         cnt = 0
         #이런 초기화방식 익숙해지기
@@ -49,6 +51,7 @@ def solve(wall, x, y):
     for i in range(x, n): #행순회
         #2중루프를 위한 k 초기화
         #솔직히 왜 이렇게 초기화하는지는 잘 모르겠음..
+        #그래서 i==x부분 자꾸 틀림
         k = y if i == x else 0 #x행일때만 y열부터 시작하고 나머지는 0부터 순회
         #x행 y열 이전은 부모함수(?)일 것이므로
         for j in range(k, m): #열순회
