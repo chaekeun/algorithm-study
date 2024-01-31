@@ -97,49 +97,186 @@
 # init()
 # bfs()
 
+# from sys import stdin
+# from heapq import heappush, heappop
+# input = stdin.readline
+
+# n=int(input())
+# a=[list(map(int, input().split())) for _ in range(n)]
+# q=[]
+
+
+# def init():
+#     for i in range(n):
+#         for j in range(n):
+#             if a[i][j]==9:
+#                 heappush(q, (0, i, j))
+#                 a[i][j]=0
+#                 return
+
+# def bfs():
+#     body, eat, ans=2, 0, 0
+#     check = [[False]*n for _ in range(n)]
+
+#     while q:
+#         d, x, y = heappop(q)
+#         if (0<a[x][y]<body):
+#             eat+=1
+#             ans+=d
+#             d=0
+#             a[x][y]=0
+#             if (eat==body):
+#                 body+=1
+#                 eat=0
+#             while q:
+#                 q.pop()
+#             check=[[False]*n for _ in range(n)]
+#         for dx, dy in (-1,0),(0,-1),(1,0),(0,1):
+#             nd, nx, ny = d+1, x+dx, y+dy
+#             if (nx<0 or nx>=n or ny<0 or ny>=n):
+#                 continue
+#             if (0<a[nx][ny]>body or check[nx][ny]):
+#                 continue
+#             heappush(q, (nd, nx, ny))
+#             check[nx][ny]=True
+#     print(ans)
+
+# init()
+# bfs()
+
+
+# from sys import stdin
+# from heapq import heappush, heappop
+# input = stdin.readline
+
+# n=int(input())
+# a=[list(map(int, input().split())) for _ in range(n)]
+# q=[]
+
+# def bfs():
+#     body, eat, ans = 2,0,0
+#     check=[[False]*n for _ in range(n)]
+#     while q:
+#         d,x,y=heappop(q)
+#         if(0<a[i][j]<body):
+#             eat+=1
+#             ans+=d
+#             d=0
+#             a[x][y]=0
+#             if(eat==body):
+#                 body+=1
+#                 eat=0
+#             while q:
+#                 q.pop()
+
+#         for dx, dy in (-1,0),(0,-1),(1,0),(0,1):
+#             nd, nx, ny = d+1, x+dx, y+dy
+#             if nx<0 or nx>=n or ny<0 or ny>=n:
+#                 continue
+#             if 0<a[nx][ny]>body or check[nx][ny]:
+#                 continue
+#             check[nx][ny]=True
+#             heappush(q, (nd,nx,ny))
+
+#     print(ans)
+
+# from sys import stdin
+# from heapq import heappop, heappush
+# input = stdin.readline
+
+# n=int(input())
+# a=[list(map(int, input().split())) for _ in range(n)]
+# q=[]
+
+# def init():
+#     for i in range(n):
+#         for j in range(n):
+#             if (a[i][j]==9):
+#                 heappush(q, (0,i,j))
+#                 a[i][j]=0
+
+# def bfs():
+#     body, eat, ans = 2,0,0
+#     check=[[False]*n for _ in range(n)]
+
+#     while q:
+#         d,x,y=heappop(q)
+#         if(0<a[x][y]<body):
+#             eat+=1
+#             ans+=d
+#             a[x][y]=0
+#             d=0
+#             if(eat==body):
+#                 body+=1
+#                 eat=0
+#             check=[[False]*n for _ in range(n)]
+#             while q:
+#                 q.pop()
+#         for dx, dy in (-1,0),(0,-1),(1,0),(0,1):
+#             nd, nx, ny = d+1, x+dx, y+dy
+#             if(nx<0 or nx>=n or ny<0 or ny>=n):
+#                 continue
+#             if(0<a[nx][ny]>body or check[nx][ny]):
+#                 continue
+#             check[nx][ny]=True
+#             heappush(q, (nd, nx, ny))
+
+#     print(ans)
+
+# init()
+# bfs()
+
 from sys import stdin
 from heapq import heappush, heappop
+#이거 잘 모르고 그냥 외운거라 이상하게 썼었다.
 input = stdin.readline
 
-n=int(input())
-a=[list(map(int, input().split())) for _ in range(n)]
-q=[]
-
+n = int(input())
+a = [list(map(int, input().split())) for _ in range(n)] 
+q = []
 
 def init():
     for i in range(n):
         for j in range(n):
-            if a[i][j]==9:
-                heappush(q, (0, i, j))
-                a[i][j]=0
-                return
+            if a[i][j] == 9:
+                heappush(q, (0,i,j))
+                a[i][j] = 0
+
 
 def bfs():
-    body, eat, ans=2, 0, 0
-    check = [[False]*n for _ in range(n)]
+    #필요한 변수, 몇개를 세어야하는지 등을 먼저 생각해본다.
+    body, eat, ans = 2,0,0
+    check=[[False]*n for _ in range(n)]
 
     while q:
-        d, x, y = heappop(q)
-        if (0<a[x][y]<body):
+        #이거 q.pop()이랑 헷갈렸다.
+        d,x,y=heappop(q)
+        if 0<a[x][y]<body:
             eat+=1
             ans+=d
             d=0
             a[x][y]=0
-            if (eat==body):
+            if eat==body:
                 body+=1
+                #이거 또 안했다..
                 eat=0
+
             while q:
                 q.pop()
-            check=[[False]*n for _ in range(n)]
+
+            #다음 물고기를 먹기 위해 움직일 때 이미 갔던 곳을 다시 방문할 수 있도록...해야했는데 안했다.
+            check = [[False]*n for _ in range(n)]
+
         for dx, dy in (-1,0),(0,-1),(1,0),(0,1):
             nd, nx, ny = d+1, x+dx, y+dy
-            if (nx<0 or nx>=n or ny<0 or ny>=n):
+            if nx<0 or nx>=n or ny<0 or ny>=n:
                 continue
-            if (0<a[nx][ny]>body or check[nx][ny]):
+            if 0<a[nx][ny] > body or check[nx][ny]:
                 continue
-            heappush(q, (nd, nx, ny))
             check[nx][ny]=True
+            heappush(q, (nd,nx,ny))
     print(ans)
 
 init()
 bfs()
+
