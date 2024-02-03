@@ -1,17 +1,12 @@
 #동빈나 음료수 얼려먹기
 
-# 1. 특정 지점 상하좌우 살펴본 뒤에 주변 지점 중에서 값이 '0'이면서 아직 방문하지 않은 지점이 있다면 해당 지점 방문
-# 2. 방문한 지점에서 1번 과정 반복 -> 연결된 모든 지점 방문 가능
-# 3. 모든 노드에 대하여 1, 2번의 과정 반복 -> 방문하지 않은 지점의 수를 카운트
-# 3번이 잘 이해안감
-
 # 내가 시도했던 풀이
 from sys import stdin
 input = stdin.readline
 
-# n, m = int(input().split())
+n, m = int(input().split())
 n, m = map(int, input().split())
-a = [list(map(int, input().split())) for _ in range(n)]
+graph = [list(map(int, input().split())) for _ in range(n)]
 visited = [[False]*m for _ in range(n)]
 
 def dfs(x, y):
@@ -36,13 +31,15 @@ for i in range(n):
             result +=1
 print(result)
 
-# #동빈나 정답
+#동빈나 정답
 # def dfs(x, y):
 #     if x<=-1 or x>=n or y<=-1 or y>=m:
 #         return False
 #         #해당노드를 아직 방문하지 않았다면
 #     if graph[x][y] == 0:
 #         graph[x][y] = 1
+#         #연결된 지점을 방문처리 하기 위한 목적
+#         #solve부분에서 return값을 사용하지 않기 때문에 result에는 반영되지 X
 #         dfs(x-1,y)
 #         dfs(x, y-1)
 #         dfs(x+1,y)
@@ -53,8 +50,39 @@ print(result)
 # result = 0
 # for i in range(n):
 #     for j in range(m):
+#         #현재 위치에서 dfs 수행 
+#         #해당 노드와 연결된 모든 노드들도 방문처리 할 수 있게 된다.
+#         #현재 노드에서만 result값이 증가(인접노드들에 대해선 result값 처리 X)
 #         if dfs(i, j)==True:
 #             result +=1
 # print(result)
 
 
+#동빈나 미로탈출
+
+from collections import deque
+
+n, m = map(int, input().split())
+graph = [list(map(int, input())) for _ in range(n)]
+    
+def bfs(x, y):
+    queue = deque()
+    queue.append((x,y))
+
+    while queue:
+        x, y = queue.popleft()
+        for dx, dy in (-1,0),(1,0),(0,-1),(0,1):
+            nx, ny = x+dx, y+dy
+            if nx<0 or nx>=n or ny<0 or ny>=m:
+                continue
+            #벽인 경우 무시
+            if graph[nx][ny] == 0:
+                continue
+            #해당 노드를 처음 방문하는 경우에만 최단 거리 기록
+            if graph[nx][ny] == 1:
+                graph[nx][ny] = graph[x][y]+1
+                queue.append((nx, ny))
+    #가장 오른쪽 아래까지의 최단 거리 반환
+    return graph[n-1][m-1]
+
+print(bfs(0,0))
