@@ -35,14 +35,13 @@ def dfs(x, y):
         if nx<0 or nx>=n or ny<0 or ny>=m:
             continue #범위를 벗어나면 다음 반복으로 넘어간다
         if not(visited[nx][ny] or a[nx][ny]): #인접노드가 방문한적 없거나 입력받은 연구소 지도 좌표가 빈공간 (= 0 = False) 일 경우 if문 실행
-            countVirus += dfs(nx, ny) #?
+            countVirus += dfs(nx, ny) #한번 dfs가 실행될때마다 1씩 누적
     return countVirus
 
 def solve(wall, x, y):
     global virus, cnt
     if wall == 3:
         cnt = 0
-        #이런 초기화방식 익숙해지기
         visited = [[False]*m for _ in range(n)] #방문여부 초기화(backtracking)
         for i, j in v: #폭탄의 좌표값들을 돌면서
             cnt += dfs(i, j) #새롭게 감염된 것까지 포함된 전체 virus들 count
@@ -66,8 +65,8 @@ def solve(wall, x, y):
 #연구소의 initial 상태 저장
 for i in range(n):
     for j in range(m):
-        if a[i][j] != 1: #만약 벽이 아니라면
-            safe += 1 #안전영역
+        if a[i][j] != 1: #벽이 아닌 공간 체크
+            safe += 1 #safe-virus=0인 공간
         if a[i][j] == 2: #만약 폭탄이 있다면
             v.append((i, j)) #v에 폭탄의 위치를 append
 

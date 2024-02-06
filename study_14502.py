@@ -97,55 +97,7 @@
 # solve(0,0,0)
 # print(safe-virus)
 
-# n, m = map(int, input().split())
-# a = [list(map(int, input().split())) for _ in range (n)]
-# visited=[[False]*m for _ in range(n)]
-# v, safe, virus=[], -3, 100
 
-# def dfs(x, y):
-
-#     cntVirus = 1
-#     visited[x][y]=True
-
-#     for dx, dy in (-1,0),(1,0),(0,-1),(0,1):
-#         nx, ny = x+dx, y+dy
-        
-#         if(nx<0 or nx>n or ny<0 or ny>m):
-#             continue
-#         if not (visited[nx][ny] or a[nx][ny]):
-#             cntVirus += dfs(nx,ny)
-#     return cntVirus
-
-# def solved(wall, x, y):
-
-#     global cnt, virus
-
-#     if (wall == 3):
-#         cnt = 0
-#         visited = [[False]*m for _ in range(n)]
-
-#         for i, j in v:
-#             cnt += dfs(i, j)
-#         virus = min(cnt, virus)
-#         return
-
-#     for ii in range(x, n):
-#         k=y if ii == x else 0
-#         for jj in range(k, m):
-#             if (a[ii][jj]==0):
-#                 a[ii][jj]=1
-#                 solved(wall+1, ii, jj+1)
-#                 a[ii][jj]=0
-
-# for i in range(n):
-#     for j in range(m):
-#         if (a[ii][jj]!=1): 
-#             safe+=1
-#         if (a[ii][jj]==2):
-#             v.append((ii,jj))
-
-# solved(0,0,0)
-# print(safe-virus)
 
 
 # n, m = map(int, input().split())
@@ -251,27 +203,27 @@
 # print(safe-virus)  
 
 
-def dfs(x, y):
+# # def dfs(x, y):
     
-    #해당노드를 방문처리
-    visited[x][y] = True
+# #     해당노드를 방문처리
+# #     visited[x][y] = True
     
-    for dx, dy in (-1,0), (1,0), (0,-1), (0,1): 
-        nx, ny = x+dx, y+dy
-        if nx<0 or nx>=n or ny<0 or ny>=m:
-            continue 
-        if not(visited[nx][ny] or a[nx][ny]):
-            countVirus += dfs(nx, ny)
-    return countVirus
+# #     for dx, dy in (-1,0), (1,0), (0,-1), (0,1): 
+# #         nx, ny = x+dx, y+dy
+# #         if nx<0 or nx>=n or ny<0 or ny>=m:
+# #             continue 
+# #         if not(visited[nx][ny] or a[nx][ny]):
+# #             countVirus += dfs(nx, ny)
+# #     return countVirus
 
-def solve(wall, x, y):
-    global virus, cnt
-    if wall == 3:
-        cnt = 0 
-        visited=[[False]*m for _ in range(n)]
+# # def solve(wall, x, y):
+# #     global virus, cnt
+# #     if wall == 3:
+# #         cnt = 0 
+# #         visited=[[False]*m for _ in range(n)]
 
-        for i, j in v:
-            cnt += dfs(i, j)
-        virus = min(virus, cnt)
-        return
+# #         for i, j in v:
+# #             cnt += dfs(i, j)
+# #         virus = min(virus, cnt)
+# #         return
     
