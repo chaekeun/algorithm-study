@@ -21,28 +21,28 @@ def bfs():
                     check[nx][ny] = True
 
 def melt():
-    global piece
+    global piece # ?
     melted, cnt = False, 0
     for i in range(n):
         for j in range(m):
             if a[i][j] >= 2:
                 a[i][j] = 0
                 melted = True
-                cnt += 1
-    if cnt:
-        piece = cnt
-    return melted
-
+                cnt += 1 #녹인 치즈 갯수 cnt
+    if cnt: #녹인 치즈가 존재하면
+        piece = cnt #녹인 갯수를 전역변수에 저장한다
+    return melted 
 
 n, m = map(int, input().split())
 a = [list(map(int, input().split())) for _ in range(n)]
 ans, piece = 0, 0
+
 while True:
     bfs()
-    if melt():
+    if melt(): # 만약 녹일 치즈가 존재한다면
         ans += 1
-    else:
+    else: # melted==False이면 더이상 녹일 치즈가 없으므로
         break
+
 print(ans)
 print(piece)
-출처: https://rebas.tistory.com/772 [PROJECT REBAS:티스토리]
