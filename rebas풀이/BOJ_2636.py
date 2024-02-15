@@ -21,7 +21,7 @@ def bfs():
                     check[nx][ny] = True
 
 def melt():
-    global piece # ?
+    global piece 
     melted, cnt = False, 0
     for i in range(n):
         for j in range(m):
@@ -39,7 +39,7 @@ ans, piece = 0, 0
 
 while True:
     bfs()
-    if melt(): # 만약 녹일 치즈가 존재한다면
+    if melt(): # 만약 치즈 녹였었으면
         ans += 1
     else: # melted==False이면 더이상 녹일 치즈가 없으므로
         break

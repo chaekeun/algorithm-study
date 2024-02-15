@@ -37,10 +37,10 @@ def melt():
         for j in range(m):
             if a[i][j] >= 3:
                 a[i][j] = 0 
-                melted = True
+                melted = True # 녹은게 있다는 뜻
             elif a[i][j] == 2:
                 a[i][j] = 1
-    return melted # 더이상 녹을게 없으면(a[i][j]>=3이면) melted == False 
+    return melted 
 
 
 n = int(input())
