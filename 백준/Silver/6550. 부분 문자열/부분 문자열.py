@@ -1,19 +1,21 @@
-import sys
-input = sys.stdin.readline
+from sys import stdin
+input = stdin.readline
+
+def find(s, t):
+    flag = "No"
+    i = 0
+    for char in t:
+        if char == s[i]:
+            i += 1
+        if i == len(s):
+            flag = "Yes"
+            return flag
+    return flag
 
 while True:
     try:
         s, t = input().split()
-        i, j = 0, 0
-        while i<len(s) and j<len(t):
-            if s[i]==t[j]:
-                i+=1
-                j+=1
-            else:
-                j+=1
-        if i == len(s):
-            print('Yes')
-        else:
-            print('No')
+        print(find(s,t))
+
     except:
         break
