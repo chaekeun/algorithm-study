@@ -1,17 +1,11 @@
 def solution(progresses, speeds):
     answer = []
-    time = 0
-    cnt = 0
-    
-    while progresses:
-        if (progresses[0]+time*speeds[0]) >= 100:
-            progresses.pop(0)
-            speeds.pop(0)
-            cnt += 1
+    q=[]
+    for p, s in zip(progresses, speeds):
+        if len(q) == 0 or -((p-100)//s) > q[-1][0]:
+            q.append([-((p-100)//s), 1])
         else:
-            if cnt > 0:
-                answer.append(cnt)
-                cnt = 0
-            time += 1
-    answer.append(cnt)
+            q[-1][1] += 1
+    
+    answer = [elem[1] for elem in q]
     return answer
