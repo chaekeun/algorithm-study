@@ -1,28 +1,40 @@
-# 먹을 물고기를 결정하는 것이 핵심
-# 4. 상어에게 가장 가까운 위치에 있는 물고기를 우선순위로 먹어야 한다. -> 최단경로 알고리즘인듯
-# 5. 여러마리가 가까이에 있다면, 가장 위쪽에 있는 물고기 (ft.행), 그 다음 순서로 가장 왼쪽에 있는 물고기(ft.열)를 우선순위로 먹어야 한다.
-# -> 4, 5번때문에 minheap에 (이동거리, 행좌표, 열좌표)를 push하는 것
-# 6. 아기 상어는 자신의 크기와 같은 수의 물고기를 먹을 때마다 크기가 1 증가한다.
-
 from sys import stdin
 from heapq import heappush, heappop
 input = stdin.readline
 
-n = int(input())
+n, m = map(int, input().split())
 a = [list(map(int, input().split())) for _ in range(n)]
-q = []
+x, y = 0, 0
+size = 2
 
 def init():
     for i in range(n):
-        for j in range(m):
+        for j in range(n):
             if a[i][j] == 9:
-                sx, sy = i, j
-
-#x, y는 아기상어의 위치
-def dijkstra(x, y):
-    q = []
-    heappush(q, (0, (x, y))) #이코테도 그렇고 (최단거리, 노드) 순으로 heappush한다
-    
+                heappush(q, (0,i,j))
+                a[i][j] = 0
+                return
+                
+def bfs():
     while q:
-        dist, now = heappop(q)
-        
+        d, x, y = heappop(q)
+        if 0<a[x][y]<body:
+            eat += 1
+            a[x][y] = 0
+            if eat == body:
+                body += 1
+                eat = 0
+            ans += d
+            d=0
+            while q:
+                q.pop()
+        for dx, dy in (-1, 0), (0, -1), (1, 0), (0, 1):
+            nd, nx, ny = d+1, x+dx, y+dy
+            if nx<0 or nx>=n or ny<0 or ny>=n:
+                continue
+            if 0<a[nx][ny]>body:
+                continue
+            heappush(q, (nd, nx, ny))
+
+    print(ans)        
+
