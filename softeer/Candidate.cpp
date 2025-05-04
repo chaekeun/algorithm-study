@@ -22,6 +22,7 @@ int main(int argc, char** argv)
         int temp;
         for (int j=0; j<m; j++){
             cin >> temp;
+            // 아 꼭 다 저장할 필요가 없이 그 행에 몇명이 있는지만 알면 되는거였겠구나
             if (temp == 1) cnt++;
         }
         cntArr[i] = cnt;
